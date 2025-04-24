@@ -1,0 +1,9 @@
+// to make the dot-env .jar file work
+{
+    "java.project.sourcePaths": [
+        "backend/src"
+    ],
+    "java.project.referencedLibraries": [
+        "backend/lib/*.jar"
+    ]
+}
