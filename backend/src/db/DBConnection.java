@@ -11,7 +11,7 @@ public class DBConnection {
 
     private static final Dotenv dotenv = Dotenv.load();
 
-    private static final String URL = "jdbc:mysql://localhost:3306/sms2";
+    private static final String URL = "jdbc:mysql://localhost:3306/" + dotenv.get("DB_NAME");
     private static final String USER = "root";
     private static final String PASSWORD = dotenv.get("DB_PASSWORD");
 
