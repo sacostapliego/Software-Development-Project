@@ -46,20 +46,8 @@ System.out.println("Welcome to the User UI!");
           };
           
           return (
-            <Box minH="100vh" bg="gray.50">
-              {/* Header */}
-              <Box bg="blue.600" color="white" py={4} px={6} mb={6}>
-                <Container maxW="container.xl">
-                  <Flex justifyContent="space-between" alignItems="center">
-                    <Heading size="lg">Employee Management System</Heading>
-                    <Flex alignItems="center" gap={4}>
-                      <Text>Welcome, {userData?.firstName || 'Employee'}</Text>
-                    </Flex>
-                  </Flex>
-                </Container>
-              </Box>
-              
-              <Container maxW="container.sm">
+            <Flex minH="100vh" bg="gray.50" justifyContent={'center'} alignItems={'center'}>         
+              <Container maxW="container.sm" paddingBottom={'5%'}>
                 <Center>
                   <Box 
                     width="100%" 
@@ -107,7 +95,7 @@ System.out.println("Welcome to the User UI!");
                   </Box>
                 </Center>
               </Container>
-            </Box>
+            </Flex>
           );
         }
         

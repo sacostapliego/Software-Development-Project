@@ -32,20 +32,8 @@ function AdminHome({ userData, onLogout }) {
   }
 
   return (
-    <Box minH="100vh" bg="gray.50">
-      {/* Header */}
-      <Box bg="blue.600" color="white" py={4} px={6} mb={6}>
-        <Container maxW="container.xl">
-          <Flex justifyContent="space-between" alignItems="center">
-            <Heading size="lg">Employee Management System</Heading>
-            <Flex alignItems="center" gap={4}>
-                <Text>Welcome, Admin</Text>
-            </Flex>
-          </Flex>
-        </Container>
-      </Box>
-      
-      <Container maxW="container.sm" justifyContent={'center'}>
+    <Flex minH="100vh" bg="gray.50" justifyContent={'center'} alignItems={'center'}>
+      <Container maxW="container.sm"  justifyContent={'center'} paddingBottom={'5%'}>
         <Center>
           <Box 
             width="100%" 
@@ -103,7 +91,7 @@ function AdminHome({ userData, onLogout }) {
           </Box>
         </Center>
       </Container>
-    </Box>
+    </Flex>
   );
 }
 
