@@ -4,18 +4,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
-import db.DBConnection;
-
 public class SqlCon {
     private static SqlCon instance = null;
-
-    // No need for these variables anymore - they'll come from DBConnection
-    // private String url;
-    // private String user;
-    // private String password;
     
     public SqlCon() {
-        // Empty constructor - no need to set credentials here
+        
     }
 
     private Connection getDBConnection() {
@@ -23,7 +16,6 @@ public class SqlCon {
         return DBConnection.getConnection();
     }
 
-    // This was a singleton class at one point, but there isn't a need for it anymore.
     // The getConnection method is used to get the instance of the SqlCon class.
     public static SqlCon getConnection() {
         if (instance == null) {
@@ -60,7 +52,7 @@ public class SqlCon {
             // Don't exit the application, just return null
             return null;
         }
-        // We don't close the connection here - DBConnection manages it
+        // We don't close the connection here
     }
 
     public List<Map<String, Object>> executeQuery(String sql, String[] params) {

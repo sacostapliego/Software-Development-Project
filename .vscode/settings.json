@@ -1,7 +1,9 @@
 // to make the dot-env .jar file work
+// to make the handlers work
 {
     "java.project.sourcePaths": [
-        "backend/src"
+        "backend/src",
+        "backend/src/handlers"
     ],
     "java.project.referencedLibraries": [
         "backend/lib/*.jar"
