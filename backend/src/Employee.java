@@ -97,9 +97,17 @@ public class Employee {
             this.fname = row.get("fname").toString();
             this.lname = row.get("lname").toString();
             this.email = row.get("email").toString();
-            this.hire_date = row.get("hiredate").toString();
+            if (row.get("hiredate") == null) {
+                this.hire_date = "No hire date found";
+            } else {
+                this.hire_date = row.get("hirefate").toString();
+            }
             this.salary = (int) Float.parseFloat(row.get("salary").toString());
-            this.ssn = row.get("ssn").toString();
+            if (row.get("ssn") == null) {
+                this.ssn = "No ssn found";
+            } else {
+                this.ssn = row.get("ssn").toString();
+            }
         }
         
     }

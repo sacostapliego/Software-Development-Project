@@ -23,7 +23,7 @@ public class FullTimeEmpReport implements IReport {
             int empid = (Integer) row.get("empid");
             //add employee ID then name to report
             report.append("Employee ID: ").append(empid).append("\t");
-            report.append("Name: ").append(row.get("fname")).append(" ").append(row.get("fname")).append("\n");
+            report.append("Name: ").append(row.get("fname")).append(" ").append(row.get("lname")).append("\n");
             //get employee payroll history
             String sql2 = "SELECT empid, pay_date, earnings FROM payroll WHERE empid = ? ORDER BY pay_date";
             int[] params = {empid};
