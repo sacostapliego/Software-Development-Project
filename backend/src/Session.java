@@ -16,17 +16,9 @@ public class Session {
     private int empid;
     private boolean isadmin = false;
     private SqlCon sqlCon = SqlCon.getConnection(); // Assuming SqlCon is a class that manages database connections
-    private static Session instance = null; // Singleton instance
 
     public Session() {
         // Constructor
-    }
-
-    public static Session getInstance() {
-        if (instance == null) {
-            instance = new Session();
-        }
-        return instance;
     }
 
     public boolean isLoggedIn() {
@@ -41,6 +33,14 @@ public class Session {
     }
     public String getEmail() {
         return email;
+    }
+
+    public void logout() {
+        this.loggedIn = false;
+        this.isadmin = false;
+        this.email = null;
+        this.empid = 0;
+        System.out.println("User logged out, all state reset");
     }
 
     public boolean login(String email, String password) {
@@ -59,6 +59,7 @@ public class Session {
             if (result != null && !result.isEmpty()) {
                 Map<String, Object> row = result.get(0);
                 int divID = (Integer.parseInt(row.get("div_id").toString()));
+                System.out.println("User division ID: " + divID);
                 if (divID == ADMIN_DIVID) {
                     isadmin = true;
                     System.out.println("User is an admin.");

@@ -25,6 +25,12 @@ public class Server {
         // Admin Handlers
         server.createContext("/api/employees", new EmployeesHandler());
         server.createContext("/api/resetPassword", new ResetPasswordHandler());
+        server.createContext("/api/payroll", new PayrollHandler());
+        server.createContext("/api/batchRaise", new BatchRaiseHandler());
+        server.createContext("/api/addEmployee", new AddEmployeeHandler());
+        server.createContext("/api/updateEmployee", new UpdateEmployeeHandler());
+        server.createContext("/api/searchEmployee", new SearchEmployeeHandler());
+        server.createContext("/api/reports", new ReportsHandler());
 
         // Employee Handlers
         server.createContext("/api/employee", new EmployeeHandler());

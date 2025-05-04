@@ -29,7 +29,7 @@ public class SetData {
 
     public static void resetPassword(int empid) {
         String sql = "UPDATE employees SET password = NULL WHERE empid = ?";
-        String[] params = {"password", String.valueOf(empid)};
+        String[] params = {String.valueOf(empid)};
         
         sqlCon.executeUpdate(sql, params);
     }

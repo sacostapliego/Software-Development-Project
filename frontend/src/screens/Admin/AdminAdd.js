@@ -12,10 +12,11 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../App';
 
-function AdminBatch({ userData }) {
-  const [minSalary, setMinSalary] = useState('');
-  const [maxSalary, setMaxSalary] = useState('');
-  const [raiseMultiplier, setRaiseMultiplier] = useState('');
+function AdminAdd({ userData }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [salary, setSalary] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -27,53 +28,48 @@ function AdminBatch({ userData }) {
     setError('');
     setSuccess('');
     
-    if (!minSalary || !maxSalary || !raiseMultiplier) {
+    if (!firstName || !lastName || !email || !salary) {
       setError('All fields are required');
       setLoading(false);
       return;
     }
 
-    const minSalaryNum = parseInt(minSalary);
-    const maxSalaryNum = parseInt(maxSalary);
-    const raiseMultiplierNum = parseFloat(raiseMultiplier);
+    const salaryNum = parseFloat(salary);
     
-    if (isNaN(minSalaryNum) || isNaN(maxSalaryNum) || isNaN(raiseMultiplierNum)) {
-      setError('Please enter valid numbers');
-      setLoading(false);
-      return;
-    }
-
-    if (minSalaryNum >= maxSalaryNum) {
-      setError('Minimum salary must be less than maximum salary');
+    if (isNaN(salaryNum) || salaryNum <= 0) {
+      setError('Please enter a valid salary amount');
       setLoading(false);
       return;
     }
     
     try {
-      const response = await fetch(`${API_BASE_URL}/batchRaise`, {
+      const response = await fetch(`${API_BASE_URL}/addEmployee`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          minSalary: minSalaryNum,
-          maxSalary: maxSalaryNum,
-          raise: raiseMultiplierNum
+          firstName,
+          lastName,
+          email,
+          salary: salaryNum
         }),
       });
       
       const data = await response.json();
       
       if (data.success) {
-        setSuccess('Batch raise processed successfully!');
-        setMinSalary('');
-        setMaxSalary('');
-        setRaiseMultiplier('');
+        setSuccess(`Employee added successfully with ID: ${data.empId}`);
+        // Clear form
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setSalary('');
       } else {
-        setError(data.message || 'Failed to process batch raise');
+        setError(data.message || 'Failed to add employee');
       }
     } catch (error) {
-      console.error('Error processing batch raise:', error);
+      console.error('Error adding employee:', error);
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -97,42 +93,52 @@ function AdminBatch({ userData }) {
             boxShadow="lg"
             bg="white"
           >
-            <Heading mb={6} textAlign="center" size="lg" color={'black'}>Batch Salary Raise</Heading>
+            <Heading mb={6} textAlign="center" size="lg" color={'black'}>Add New Employee</Heading>
             <form onSubmit={handleSubmit}>
               <Stack spacing={4}>
                 <Box>
-                  <Text mb={1} color={'black'}>Minimum Salary ($)</Text>
+                  <Text mb={1} color={'black'}>First Name</Text>
                   <Input 
                     color={'black'}
-                    type="number" 
-                    value={minSalary} 
-                    onChange={(e) => setMinSalary(e.target.value)} 
-                    placeholder="Enter minimum salary"
+                    value={firstName} 
+                    onChange={(e) => setFirstName(e.target.value)} 
+                    placeholder="Enter first name"
                     required
                   />
                 </Box>
                 
                 <Box>
-                  <Text mb={1} color={'black'}>Maximum Salary ($)</Text>
+                  <Text mb={1} color={'black'}>Last Name</Text>
                   <Input 
                     color={'black'}
-                    type="number" 
-                    value={maxSalary} 
-                    onChange={(e) => setMaxSalary(e.target.value)} 
-                    placeholder="Enter maximum salary"
+                    value={lastName} 
+                    onChange={(e) => setLastName(e.target.value)} 
+                    placeholder="Enter last name"
                     required
                   />
                 </Box>
                 
                 <Box>
-                  <Text mb={1} color={'black'}>Raise Multiplier</Text>
+                  <Text mb={1} color={'black'}>Email</Text>
                   <Input 
                     color={'black'}
-                    type="number" 
+                    type="email"
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Enter email address"
+                    required
+                  />
+                </Box>
+                
+                <Box>
+                  <Text mb={1} color={'black'}>Salary ($)</Text>
+                  <Input 
+                    color={'black'}
+                    type="number"
                     step="0.01" 
-                    value={raiseMultiplier} 
-                    onChange={(e) => setRaiseMultiplier(e.target.value)} 
-                    placeholder="e.g., 1.05 for 5% raise"
+                    value={salary} 
+                    onChange={(e) => setSalary(e.target.value)} 
+                    placeholder="Enter salary amount"
                     required
                   />
                 </Box>
@@ -156,7 +162,7 @@ function AdminBatch({ userData }) {
                   isLoading={loading}
                   mt={2}
                 >
-                  Process Batch Raise
+                  Add Employee
                 </Button>
                 
                 <Button 
@@ -176,4 +182,4 @@ function AdminBatch({ userData }) {
   );
 }
 
-export default AdminBatch;
+export default AdminAdd;

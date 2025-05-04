@@ -70,7 +70,7 @@ function Login({ onLoginSuccess }) {
             boxShadow="lg"
             bg="white"
           >
-            <Heading mb={6} textAlign="center" size="lg" color={'black'}>Employee Management System</Heading>
+            <Heading mb={6} textAlign="center" size="lg" color={'black'}>Z Employee System</Heading>
             <form onSubmit={handleSubmit}>
               <Stack spacing={4}>
                 <Box>

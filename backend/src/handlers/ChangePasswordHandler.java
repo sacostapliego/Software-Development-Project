@@ -27,7 +27,7 @@ public class ChangePasswordHandler implements HttpHandler {
                 String newPassword = requestBody.get("newPassword").asText();
 
                 // Use the Session class to handle the password change
-                Session session = Session.getInstance();
+                Session session = new Session();
                 boolean success = session.resetPassword(email, currentPassword, newPassword);
                 
                 Map<String, Object> responseMap = new HashMap<>();

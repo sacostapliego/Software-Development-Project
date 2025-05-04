@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class BasicUI {
 
     private static Scanner scanner = new Scanner(System.in);
-    private static Session session = Session.getInstance();
+    private static Session session = new Session();
     public static void main(String[] args) {
 
         System.out.println("Welcome to the Employee Management System!");

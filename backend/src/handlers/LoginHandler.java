@@ -22,7 +22,7 @@ public class LoginHandler implements HttpHandler {
                 String email = requestBody.get("email").asText();
                 String password = requestBody.get("password").asText();
                 
-                Session session = Session.getInstance();
+                Session session = new Session();
                 boolean success = session.login(email, password);
                 
                 // Prepare response as a Map that Jackson will convert to JSON

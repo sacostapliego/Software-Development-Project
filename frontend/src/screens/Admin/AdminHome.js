@@ -1,10 +1,21 @@
+/* 
+System.out.println("1. View Reports");
+System.out.println("2. Search Employees");
+System.out.println("3. Update Employees");
+System.out.println("4. Batch raise");
+System.out.println("5. reset password");
+System.out.println("6. add new employee");
+System.out.println("7. Exit");
+System.out.print("Please select an option: ");
+*/
+
+
 import React from 'react';
 import { 
   Box, 
   Container, 
   Heading, 
   Button,
-  Text,
   VStack,
   Flex,
   Center
@@ -21,14 +32,28 @@ function AdminHome({ userData, onLogout }) {
     navigate('/login');
   };
 
-  const handleReports = () => {}
+  const handleReports = () => {
+    navigate('/admin/reports');
+  }
   
-  const handleBatchRaise = () => {}
+  const handleBatchRaise = () => {
+    navigate('/admin/batchraise');
+  }
 
-  const handleResetPassword = () => {}
+  const handleResetPassword = () => {
+    navigate('/admin/resetpassword');
+  }
 
   const handleViewEmployees = () => {
     navigate('/admin/employees');
+  }
+
+  const handleAddEmployee = () => {
+    navigate('/admin/addemployee');
+  }
+
+  const handleUpateEmployee = () => {
+    navigate('/admin/updateemployee');
   }
 
   return (
@@ -46,14 +71,6 @@ function AdminHome({ userData, onLogout }) {
           >
             <VStack spacing={5} align="stretch">
               <Heading size="lg" textAlign="center" padding={4} color={'black'} borderColor={'black'} borderBottomWidth={'medium'}>Admin Homepage</Heading>
-              
-              <Button 
-                size="lg" 
-                onClick={handleViewEmployees}
-                height="60px"
-              >
-                View Employees
-              </Button>
 
               <Button 
                 size="lg" 
@@ -61,6 +78,30 @@ function AdminHome({ userData, onLogout }) {
                 height="60px"
               >
                 View Reports
+              </Button>
+
+              <Button 
+                size="lg" 
+                onClick={handleViewEmployees}
+                height="60px"
+              >
+                Search Employees
+              </Button>
+
+              <Button 
+                size="lg" 
+                onClick={handleUpateEmployee}
+                height="60px"
+              >
+                Update Employees
+              </Button>
+
+              <Button 
+                size="lg" 
+                onClick={handleAddEmployee}
+                height="60px"
+              >
+                Add New Employee
               </Button>
               
               <Button 
@@ -79,7 +120,6 @@ function AdminHome({ userData, onLogout }) {
                 Reset Password
               </Button>
             
-              
               <Button 
                 size="lg" 
                 onClick={handleLogout}

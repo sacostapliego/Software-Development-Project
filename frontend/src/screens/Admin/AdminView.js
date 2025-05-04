@@ -25,7 +25,6 @@ function AdminView({ userData, onLogout }) {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        // api call to get all employees
         const response = await fetch(`${API_BASE_URL}/employees`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -43,14 +42,10 @@ function AdminView({ userData, onLogout }) {
     fetchEmployeeData();
   }, []);
 
-  // Fetch payroll data when an employee is selected
   useEffect(() => {
     const fetchPayrollData = async () => {
       if (selectedEmployee) {
         try {
-            // api call to get payroll data for selected employee
-            // in this exampl, we are using the employee id to get the payroll data
-            // 
           const response = await fetch(`${API_BASE_URL}/payroll?empid=${selectedEmployee.id}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -77,40 +72,36 @@ function AdminView({ userData, onLogout }) {
     navigate('/admin');
   };
 
+  const handleSearchEmployees = () => {
+    navigate('/admin/employees/search');
+  };
+
   return (
-    <Box>
-      {/* Header */}
-      <Box bg="blue.600" color="white" py={4} px={6} mb={6}>
-        <Container maxW="container.xl">
-          <Flex justifyContent="space-between" alignItems="center">
-            <Flex alignItems="center" >
-              <Text>
-                Welcome, Admin
-              </Text>
-              <Button colorScheme="blue" variant="outline" onClick={handleBackToHomepage}>
-                Search Employees
-              </Button>
-              <Button colorScheme="blue" variant="outline" onClick={handleBackToHomepage}>
-                Update Employees
-              </Button>
-              <Button colorScheme="blue" variant="outline" onClick={handleBackToHomepage}>
-                Add New Employee
-              </Button>
-              <Button colorScheme="teal" variant="outline" onClick={handleBackToHomepage}>
-                Back to Homepage
-              </Button>
-            </Flex>
+    <Box background={'white'} color={'black'} minH="100vh" width="100%">
+      <Container maxW="container.xl" pt={6}>
+        {/* New header row with Employees title and buttons on same line */}
+        <Flex justifyContent="space-between" alignItems="center" mb={6}>
+          <Heading size="md">Employees</Heading>
+          <Flex gap={2}>
+            <Button size="sm" onClick={handleSearchEmployees}>
+              Search Employees
+            </Button>
+            <Button size="sm" onClick={handleBackToHomepage}>
+              Back to Homepage
+            </Button>
           </Flex>
-        </Container>
-      </Box>
-      
-      <Container maxW="container.xl">
+        </Flex>
+        
         <Flex direction={{ base: "column", md: "row" }} gap={6}>
           {/* Employee List */}
           <Box flex="1" pr={{ base: 0, md: 4 }}>
-            <Heading size="md" mb={4}>Employees</Heading>
-            
-            {employees.length > 0 ? (
+            {loading ? (
+              <Center p={10}>
+                <Spinner size="xl" />
+              </Center>
+            ) : error ? (
+              <Text color="red.500">{error}</Text>
+            ) : employees.length > 0 ? (
               <Stack spacing={2}>
                 {employees.map(employee => (
                   <Box 
@@ -120,7 +111,7 @@ function AdminView({ userData, onLogout }) {
                     borderRadius="md"
                     cursor="pointer"
                     bg={selectedEmployee?.id === employee.id ? "blue.50" : "white"}
-                    borderColor={selectedEmployee?.id === employee.id ? "blue.400" : "gray.200"}
+                    borderColor={selectedEmployee?.id === employee.id ? "blue.400" : "black"}
                     _hover={{ bg: "gray.50" }}
                     onClick={() => handleEmployeeSelect(employee)}
                     color={selectedEmployee?.id === employee.id ? "blue.600" : "gray.800"}
