@@ -14,7 +14,6 @@ System.out.println("Welcome to the User UI!");
           Container, 
           Heading, 
           Button,
-          Text,
           VStack,
           Flex,
           Center,
@@ -32,17 +31,16 @@ System.out.println("Welcome to the User UI!");
             navigate('/login');
           };
           
-          // These handlers do nothing
           const handleViewProfile = () => {
-        
+            navigate('/employee/profile');
           };
           
           const handleViewPayHistory = () => {
-           
+            navigate('/employee/payhistory');
           };
           
           const handleChangePassword = () => {
-            
+            navigate('/employee/resetpassword');
           };
           
           return (

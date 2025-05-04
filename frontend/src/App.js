@@ -5,6 +5,9 @@ import AdminHome from './screens/Admin/AdminHome';
 import AdminView from './screens/Admin/AdminView';
 import EmployeeHome from './screens/employee/EmployeeHome';
 import { Provider } from "./components/ui/provider"
+import EmployeeResetPass from './screens/employee/EmployeeResetPass';
+import EmployeeView from './screens/employee/EmployeeView';
+import EmployeeViewPay from './screens/employee/EmployeeViewPay';
 
 // Base URL for API endpoints
 export const API_BASE_URL = 'http://localhost:8080/api';
@@ -56,6 +59,30 @@ function App() {
             element={
               isAuthenticated && !userData?.isAdmin ? 
                 <EmployeeHome userData={userData} onLogout={handleLogout} /> : 
+                <Navigate to="/login" />
+            } 
+          />
+          <Route 
+            path="/employee/resetpassword" 
+            element={
+              isAuthenticated && !userData?.isAdmin ? 
+                <EmployeeResetPass userData={userData} onLogout={handleLogout} /> : 
+                <Navigate to="/login" />
+            } 
+          />
+          <Route 
+            path="/employee/profile" 
+            element={
+              isAuthenticated && !userData?.isAdmin ? 
+                <EmployeeView userData={userData} onLogout={handleLogout} /> : 
+                <Navigate to="/login" />
+            } 
+          />
+          <Route 
+            path="/employee/payhistory" 
+            element={
+              isAuthenticated && !userData?.isAdmin ? 
+                <EmployeeViewPay userData={userData} /> : 
                 <Navigate to="/login" />
             } 
           />

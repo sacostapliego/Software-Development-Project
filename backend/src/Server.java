@@ -19,11 +19,21 @@ public class Server {
     public static void main(String[] args) throws Exception {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         
-        server.createContext("/api/employees", new EmployeesHandler());
+        // Regular handlers
         server.createContext("/api/login", new LoginHandler());
+
+        // Admin Handlers
+        server.createContext("/api/employees", new EmployeesHandler());
         server.createContext("/api/resetPassword", new ResetPasswordHandler());
+
+        // Employee Handlers
+        server.createContext("/api/employee", new EmployeeHandler());
+        server.createContext("/api/changePassword", new ChangePasswordHandler()); 
+        server.createContext("/api/personalPayroll", new PersonalPayrollHandler());
+
+
         
-        System.out.println("Server started on port 8080");
+        System.out.println("Server started at http://localhost:8080");
         server.start();
     }
     

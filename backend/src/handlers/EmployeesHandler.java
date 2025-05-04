@@ -25,6 +25,7 @@ public class EmployeesHandler implements HttpHandler {
             try {
                 conn = DBConnection.getConnection();
                 stmt = conn.createStatement();
+                // Execute a query to get employee data
                 rs = stmt.executeQuery("SELECT empid, fname, lname, email, hireDate, salary FROM employees");
                 
                 List<Map<String, Object>> employees = new ArrayList<>();
