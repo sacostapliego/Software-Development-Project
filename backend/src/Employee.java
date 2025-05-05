@@ -100,7 +100,7 @@ public class Employee {
             if (row.get("hiredate") == null) {
                 this.hire_date = "No hire date found";
             } else {
-                this.hire_date = row.get("hirefate").toString();
+                this.hire_date = row.get("hiredate").toString();
             }
             this.salary = (int) Float.parseFloat(row.get("salary").toString());
             if (row.get("ssn") == null) {
